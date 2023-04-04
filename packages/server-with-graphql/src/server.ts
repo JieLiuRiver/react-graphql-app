@@ -2,7 +2,7 @@ import { app } from "./app";
 
 const port = app.get("port");
 
-const server = app.listen(port, onListening);
+const server = app.listen(3000, onListening);
 server.on("error", onError);
 
 function onError(error: NodeJS.ErrnoException) {
@@ -28,10 +28,7 @@ function onError(error: NodeJS.ErrnoException) {
 }
 
 function onListening() {
-    const addr = server.address();
-    const bind =
-        typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}`;
-    console.log(`Listening on ${bind}`);
+    console.log(`Listening on port 3000`);
 }
 
 export default server;
