@@ -1,0 +1,26 @@
+{
+  "name": "react-client",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Bode He <bode_he@epam.com>",
+  "homepage": "https://github.com/JieLiuRiver/react-graphql-app#readme",
+  "license": "ISC",
+  "main": "lib/react-client.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JieLiuRiver/react-graphql-app.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/JieLiuRiver/react-graphql-app/issues"
+  }
+}
