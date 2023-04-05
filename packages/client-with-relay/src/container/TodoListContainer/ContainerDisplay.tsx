@@ -19,6 +19,14 @@ const TodoListContainerDisplay: React.FC<TodoListContainerDisplayProps> = ({
   const { submit: doDelete, submiting: deleting } = useDeleteMutation()
   const { submit: doChangeStatus, submiting: changing } = useChangeStatusMutation()
 
+  if (data == null) {
+    return <div>Error: Data is null or undefined</div>
+  }
+
+  if (data.todos == null) {
+    return <div>Error: Todos data is null or undefined</div>
+  }
+
   return (
     <>
       <TodoList
