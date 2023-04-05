@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
 import { RelayEnvironmentProvider } from 'react-relay/hooks';
 // import { graphql } from 'babel-plugin-relay/macro';
 import { Environment, Store, RecordSource, Network } from 'relay-runtime';
@@ -59,14 +59,9 @@ function App() {
     <RelayEnvironmentProvider environment={environment}>
       <BrowserRouter>
         <h1>Hello, Relay & GraphQL</h1>
-        <nav>
-          <ul>
-            <li><Link to="/todos">Todos</Link></li>
-          </ul>
-        </nav>
 
         <Route path="/todos" component={Todos} />
-        {/* <Route path="/contact" component={Contact} /> */}
+        <Redirect to="/todos" />
       </BrowserRouter>
     </RelayEnvironmentProvider>
   );
