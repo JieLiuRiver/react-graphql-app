@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<7652c0d615fe976faa70bff15b9362f0>>
+ * @generated SignedSource<<eb3e63d286746bdda69e96a10b509bf3>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,17 +9,17 @@
 // @ts-nocheck
 
 import { ConcreteRequest, Query } from 'relay-runtime';
-export type TodoLIstContainerQuery$variables = {};
-export type TodoLIstContainerQuery$data = {
+export type TodoListContainerQuery$variables = {};
+export type TodoListContainerQuery$data = {
   readonly todos: ReadonlyArray<{
     readonly completed: boolean;
     readonly id: string;
     readonly text: string;
   } | null>;
 };
-export type TodoLIstContainerQuery = {
-  response: TodoLIstContainerQuery$data;
-  variables: TodoLIstContainerQuery$variables;
+export type TodoListContainerQuery = {
+  response: TodoListContainerQuery$data;
+  variables: TodoListContainerQuery$variables;
 };
 
 const node: ConcreteRequest = (function(){
@@ -62,7 +62,7 @@ return {
     "argumentDefinitions": [],
     "kind": "Fragment",
     "metadata": null,
-    "name": "TodoLIstContainerQuery",
+    "name": "TodoListContainerQuery",
     "selections": (v0/*: any*/),
     "type": "Query",
     "abstractKey": null
@@ -71,20 +71,20 @@ return {
   "operation": {
     "argumentDefinitions": [],
     "kind": "Operation",
-    "name": "TodoLIstContainerQuery",
+    "name": "TodoListContainerQuery",
     "selections": (v0/*: any*/)
   },
   "params": {
-    "cacheID": "69b1f88b62348fbab8058a438c0e1ce5",
+    "cacheID": "de821abbab33386db0f4ce92a5b48401",
     "id": null,
     "metadata": {},
-    "name": "TodoLIstContainerQuery",
+    "name": "TodoListContainerQuery",
     "operationKind": "query",
-    "text": "query TodoLIstContainerQuery {\n  todos {\n    id\n    text\n    completed\n  }\n}\n"
+    "text": "query TodoListContainerQuery {\n  todos {\n    id\n    text\n    completed\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "c16410b3a08097e1ddbb133db76f5dc5";
+(node as any).hash = "4441a2309874332b3ed976398b106f3b";
 
 export default node;

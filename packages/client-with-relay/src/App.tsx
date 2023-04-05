@@ -18,17 +18,34 @@ const client = new ApolloClient({
 
 const network = Network.create((operation, variables) => {
   return new Promise((resolve, reject) => {
-    client
-      .query({
-        query: gql`${operation.text}`,
-        variables,
-      })
-      .then((result) => {
-        resolve(result as any);
-      })
-      .catch((error) => {
-        reject(error);
-      });
+    switch (operation.operationKind) {
+      case 'query':
+        client.query({
+          query: gql`${operation.text}`,
+          variables,
+        })
+          .then((result) => {
+            resolve(result as any);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+        break;
+      case 'mutation':
+        client.mutate({
+          mutation: gql`${operation.text}`,
+          variables,
+        })
+          .then((result) => {
+            resolve(result as any);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+        break;
+      default:
+        break;
+    }
   });
 });
 

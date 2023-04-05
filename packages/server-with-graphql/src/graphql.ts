@@ -7,36 +7,6 @@ import { DBType, ToDoAttributes } from './database';
 const typeDefs = fs.readFileSync(path.join(__dirname, '..', 'schema.graphql'), 'utf8');
 
 export const init = async (app: Express, db: DBType): Promise<ApolloServer<ExpressContext>> => {
-    
-    // const typeDefs = `#graphql
-    //   type ToDo {
-    //     id: ID!
-    //     text: String!
-    //     completed: Boolean!
-    //   }
-
-    //   type Query {
-    //     todos: [ToDo]!
-    //   }
-
-    //   type Mutation {
-    //     addToDo(
-    //       text: String!,
-    //       completed: Boolean!
-    //     ): ToDo!
-
-    //     updateToDo(
-    //       id: ID!,
-    //       text: String,
-    //       completed: Boolean
-    //     ): ToDo!
-
-    //     deleteToDo(
-    //       id: ID!
-    //     ): Boolean!
-    //   }
-    // `;
-    
     const resolvers = {
         Query: {
             todos: async () => {

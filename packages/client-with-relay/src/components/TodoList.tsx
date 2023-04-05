@@ -1,16 +1,23 @@
 import React from 'react'
-import type { TodoLIstContainerQuery$data } from '../container/__generated__/TodoLIstContainerQuery.graphql'
+import { List, ListItem, ListItemText, Button } from '@mui/material'
+import type { TodoListContainerQuery$data } from '../container/TodoListContainer/__generated__/TodoListContainerQuery.graphql'
 
 type TodoListProps = {
-  dataSoure: TodoLIstContainerQuery$data
+  dataSoure: TodoListContainerQuery$data
 }
 
 export default React.memo<TodoListProps>(({
   dataSoure
 }) => {
-  return <ul>
-    {dataSoure['todos'].map((item, index) => <li key={`key_${item?.id}`}>
-      <span>{index + 1}. {item?.text}</span> <button>delete</button>
-    </li>)}
-  </ul>
+  return <List>
+    {dataSoure['todos'].map((item, index) => <ListItem key={`key_${item?.id}`}>
+      <ListItemText
+        primary={<>
+          <span>{index + 1}. {item?.text}</span> ({item?.completed ? 'completed' : 'uncompleted'})
+        </>}
+      />
+      <Button size="small">complete</Button>
+      <Button color="error" size="small">delete</Button>
+    </ListItem>)}
+  </List>
 })

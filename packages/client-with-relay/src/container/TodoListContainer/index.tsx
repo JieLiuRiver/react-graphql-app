@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import type { PreloadedQuery } from 'react-relay';
 import graphql from 'babel-plugin-relay/macro';
-import type { TodoLIstContainerQuery } from './__generated__/TodoLIstContainerQuery.graphql'
+import type { TodoListContainerQuery } from './__generated__/TodoListContainerQuery.graphql'
 import { useQueryLoader, usePreloadedQuery } from 'react-relay';
-import TodoList from '../components/TodoList';
+import TodoList from '../../components/TodoList';
 
 const query = graphql`
-  query TodoLIstContainerQuery {
+  query TodoListContainerQuery {
     todos {
       id
       text
@@ -16,13 +16,13 @@ const query = graphql`
 `;
 
 interface TodoLIstContainerDisplayProps {
-  todosQueryRef: PreloadedQuery<TodoLIstContainerQuery, Record<string, unknown>>
+  todosQueryRef: PreloadedQuery<TodoListContainerQuery, Record<string, unknown>>
 }
 
 const TodoLIstContainerDisplay: React.FC<TodoLIstContainerDisplayProps> = ({
   todosQueryRef
 }) => {
-  const data = usePreloadedQuery<TodoLIstContainerQuery>(query, todosQueryRef as any);
+  const data = usePreloadedQuery<TodoListContainerQuery>(query, todosQueryRef as any);
   return (
     <>
       <TodoList dataSoure={data} />
@@ -31,7 +31,7 @@ const TodoLIstContainerDisplay: React.FC<TodoLIstContainerDisplayProps> = ({
 }
 
 interface TodoLIstContainerProps {
-  initialQueryRef: PreloadedQuery<TodoLIstContainerQuery> | null
+  initialQueryRef: PreloadedQuery<TodoListContainerQuery> | null
 }
 
 export default React.memo<TodoLIstContainerProps>(({
