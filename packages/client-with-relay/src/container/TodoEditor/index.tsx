@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react'
-import graphql from 'babel-plugin-relay/macro';
-import { useMutation, Disposable } from 'react-relay';
+import React, { useState } from 'react'
 import { Modal, ModalProps, Box, Stack, TextField, Button } from '@mui/material';
-import { TodoEditorMutation } from './__generated__/TodoEditorMutation.graphql'
+import useAddMutation from '../../hooks/useAddMutation';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -15,14 +13,6 @@ const style = {
   padding: 5
 };
 
-const addTodoMutation = graphql`
-  mutation TodoEditorMutation($text: String!, $completed: Boolean!) {
-    addToDo(text: $text, completed: $completed) {
-      id
-    }
-  }
-`
-
 interface TodoEditorProps extends Omit<ModalProps, 'children'> {
   onCancel: (id?: string) => void
 }
@@ -32,31 +22,7 @@ export default React.memo<TodoEditorProps>(({
   onCancel
 }) => {
   const [taskName, setTaskName] = useState('')
-  const [commit, inFlight] = useMutation<TodoEditorMutation>(addTodoMutation);
-  const disposableRef = React.useRef<Disposable>();
-
-  useEffect(() => () => disposableRef.current?.dispose(), [])
-
-  const handleSubmit = () => {
-    if (!taskName) {
-      alert('Please enter task name')
-      return
-    }
-    console.log('taskName', taskName)
-    disposableRef.current = commit({
-      variables: {
-        text: taskName,
-        completed: false
-      },
-      onCompleted: (data, errors) => {
-        console.log('onCompleted', data.addToDo.id, errors);
-        onCancel(data.addToDo.id)
-      },
-      onError: (error) => {
-        console.log('error', error)
-      }
-    })
-  }
+  const { submit, submiting } = useAddMutation()
 
   return (
     <>
@@ -69,7 +35,10 @@ export default React.memo<TodoEditorProps>(({
           <Stack direction="row" justifyContent="flex-end" alignItems="center">
             <Button onClick={() => onCancel()} variant="outlined">Cancel</Button>
             <div style={{ width: 10 }} />
-            <Button variant="contained" disabled={inFlight} onClick={() => handleSubmit()}>Submit</Button>
+            <Button variant="contained" disabled={submiting} onClick={async () => {
+              const newTodoId = await submit(taskName)
+              console.log('newTodoId', newTodoId)
+            }}>Submit</Button>
           </Stack>
         </Box>
       </Modal>
