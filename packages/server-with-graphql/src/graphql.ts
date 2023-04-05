@@ -1,40 +1,67 @@
-
-import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer, ExpressContext } from 'apollo-server-express';
 import { Express } from 'express';
+import { DBType, ToDoAttributes } from './database';
 
-export const init = async (app: Express) => {
-    const resolvers = {
-        Query: {
-            books: () => ([
-                {
-                    title: 'The Awakening',
-                    author: 'Kate Chopin',
-                  },
-                  {
-                    title: 'City of Glass',
-                    author: 'Paul Auster',
-                  },
-            ]),
-        },
-    };
-
+export const init = async (app: Express, db: DBType): Promise<ApolloServer<ExpressContext>> => {
+    
     const typeDefs = `#graphql
-      # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
-    
-      # This "Book" type defines the queryable fields for every book in our data source.
-      type Book {
-        title: String
-        author: String
+      type ToDo {
+        id: ID!
+        text: String!
+        completed: Boolean!
       }
-    
-      # The "Query" type is special: it lists all of the available queries that
-      # clients can execute, along with the return type for each. In this
-      # case, the "books" query returns an array of zero or more Books (defined above).
+
       type Query {
-        books: [Book]
+        todos: [ToDo]!
+      }
+
+      type Mutation {
+        addToDo(
+          text: String!,
+          completed: Boolean!
+        ): ToDo!
+
+        updateToDo(
+          id: ID!,
+          text: String,
+          completed: Boolean
+        ): ToDo!
+
+        deleteToDo(
+          id: ID!
+        ): Boolean!
       }
     `;
     
+    const resolvers = {
+        Query: {
+            todos: async () => {
+              const todos = await db.ToDo.findAll();
+              return todos.map(todo => todo.toJSON());
+            },
+        },
+        Mutation: {
+            addToDo: async (_: any, { text, completed }: Omit<ToDoAttributes, 'id'>) => {
+              const todo = await db.ToDo.create({ text, completed });
+              return todo.toJSON();
+            },
+            updateToDo: async (_: any, { id, text, completed }: ToDoAttributes) => {
+                const todo = await db.ToDo.findByPk(id);
+                if (!todo) throw new Error('ToDo not found');
+                if (text !== undefined) todo.text = text;
+                if (completed !== undefined) todo.completed = completed;
+                await todo.save();
+                return todo.toJSON();
+            },
+            deleteToDo: async (_: any, { id }: Pick<ToDoAttributes, 'id'>) => {
+                const todo = await db.ToDo.findByPk(id);
+                if (!todo) throw new Error('ToDo not found');
+                await todo.destroy();
+                return true;
+            },
+        },
+    };
+
     const apolloServer = new ApolloServer({
         typeDefs,
         resolvers,
