@@ -1,0 +1,15 @@
+type ToDo {
+  id: ID!
+  text: String!
+  completed: Boolean!
+}
+
+type Query {
+  todos: [ToDo]!
+}
+
+type Mutation {
+  addToDo(text: String!, completed: Boolean!): ToDo!
+  updateToDo(id: ID!, text: String, completed: Boolean): ToDo!
+  deleteToDo(id: ID!): Boolean!
+}
