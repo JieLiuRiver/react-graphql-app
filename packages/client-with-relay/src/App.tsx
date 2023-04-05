@@ -1,66 +1,17 @@
 import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom';
 import { RelayEnvironmentProvider } from 'react-relay/hooks';
-// import { graphql } from 'babel-plugin-relay/macro';
-import { Environment, Store, RecordSource, Network } from 'relay-runtime';
-import { ApolloClient, InMemoryCache, createHttpLink, gql } from '@apollo/client';
-// import { RelayNetworkLayer } from 'react-relay-network-modern';
 import Todos from './pages/Todos';
+import MergeQuery from './pages/MergeQuery';
+import useRelayEnvironment from './hooks/useRelayEnvironment';
 import './App.css';
 
-const httpLink = createHttpLink({
-  uri: 'http://localhost:3000/graphql'
-});
-
-const client = new ApolloClient({
-  link: httpLink,
-  cache: new InMemoryCache(),
-});
-
-const network = Network.create((operation, variables) => {
-  return new Promise((resolve, reject) => {
-    switch (operation.operationKind) {
-      case 'query':
-        client.query({
-          query: gql`${operation.text}`,
-          variables,
-        })
-          .then((result) => {
-            resolve(result as any);
-          })
-          .catch((error) => {
-            reject(error);
-          });
-        break;
-      case 'mutation':
-        client.mutate({
-          mutation: gql`${operation.text}`,
-          variables,
-        })
-          .then((result) => {
-            resolve(result as any);
-          })
-          .catch((error) => {
-            reject(error);
-          });
-        break;
-      default:
-        break;
-    }
-  });
-});
-
-const environment = new Environment({
-  network,
-  store: new Store(new RecordSource()),
-});
-
 function App() {
+  const environment = useRelayEnvironment()
   return (
     <RelayEnvironmentProvider environment={environment}>
       <BrowserRouter>
-        <h1>Hello, Relay & GraphQL</h1>
-
         <Route path="/todos" component={Todos} />
+        <Route path="/merge-query" component={MergeQuery} />
         <Redirect to="/todos" />
       </BrowserRouter>
     </RelayEnvironmentProvider>

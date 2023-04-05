@@ -6,7 +6,8 @@ import TodoEditor from '../container/TodoEditor';
 
 export default React.memo(() => {
   const [open, setOpen] = useState(false)
-  return (
+  return (<>
+    <h1>Todos with React & Relay & GraphQL</h1>
     <Card style={{ width: 600 }}>
       <CardContent>
         <Stack alignItems="flex-end" justifyContent="center">
@@ -19,5 +20,6 @@ export default React.memo(() => {
         }} />
       </CardContent>
     </Card>
+  </>
   )
 })
