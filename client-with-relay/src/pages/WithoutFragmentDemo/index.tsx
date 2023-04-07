@@ -1,33 +1,34 @@
 import React from 'react'
 import graphql from 'babel-plugin-relay/macro';
 import { useLazyLoadQuery } from 'react-relay'
-import type { FragmentDemoQuery } from './__generated__/FragmentDemoQuery.graphql'
+import type { WithoutFragmentDemoQuery } from './__generated__/WithoutFragmentDemoQuery.graphql'
 import AuthorDisplay from './AuthorDisplay';
 
-const fragmentDemoQuery = graphql`
-  query FragmentDemoQuery($todoId: ID!) {
+const withoutFragmentDemoQuery = graphql`
+  query WithoutFragmentDemoQuery($todoId: ID!) {
     todo(id: $todoId) {
       id
       text
       completed,
       author {
-        ...AuthorDisplayFragment
+        id,
+        name
       }
     }
   }
 `;
 
-export default function FragmentDemo() {
+export default function WithoutFragmentDemo() {
   return (
     <React.Suspense fallback={<p>Loading...</p>}>
-      <FragmentDemoContent />
+      <WithoutFragmentDemoContent />
     </React.Suspense>
   );
 }
 
 
-function FragmentDemoContent() {
-  const data = useLazyLoadQuery<FragmentDemoQuery>(fragmentDemoQuery, {
+function WithoutFragmentDemoContent() {
+  const data = useLazyLoadQuery<WithoutFragmentDemoQuery>(withoutFragmentDemoQuery, {
     todoId: '1',
   })
   return (

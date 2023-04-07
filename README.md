@@ -17,3 +17,9 @@ The useQueryLoader hook can be used to delay loading queries and cache query res
 usePreloadedQuery hook can be used to use previously loaded query data. It receives a query reference as a parameter and returns query data. This avoids retriggering queries, reduces network requests and improves performance.
 
 In conclusion, useQueryLoader and usePreloadedQuery hooks can help us optimize data loading and rendering in React-Relay. Their combination can improve application performance and reduce redundant network requests
+
+
+### Fragment
+- [fragments](https://github.com/facebook/relay/blob/main/website/docs/tutorial/fragments-1.md)
+- [use-fragment](https://github.com/facebook/relay/blob/main/website/docs/api-reference/hooks/use-fragment.md)
+  
