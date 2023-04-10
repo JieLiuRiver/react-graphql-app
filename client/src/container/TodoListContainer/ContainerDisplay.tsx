@@ -8,29 +8,29 @@ import useChangeStatusMutation from "../../hooks/useChangeStatusMutation";
 
 interface TodoListContainerDisplayProps {
   query: any
-  todosQueryRef: PreloadedQuery<TodoListContainerQuery, Record<string, unknown>>
+  todoQueryRef: PreloadedQuery<TodoListContainerQuery, Record<string, unknown>>
 }
 
 const TodoListContainerDisplay: React.FC<TodoListContainerDisplayProps> = ({
-  todosQueryRef,
+  todoQueryRef,
   query
 }) => {
-  const data = usePreloadedQuery<TodoListContainerQuery>(query, todosQueryRef as any);
-  const { submit: doDelete, submiting: deleting } = useDeleteMutation()
-  const { submit: doChangeStatus, submiting: changing } = useChangeStatusMutation()
+  const data = usePreloadedQuery<TodoListContainerQuery>(query, todoQueryRef as any);
+  const { submit: doDelete, submitting: deleting } = useDeleteMutation()
+  const { submit: doChangeStatus, submitting: changing } = useChangeStatusMutation()
 
   if (data == null) {
     return <div>Error: Data is null or undefined</div>
   }
 
   if (data.todos == null) {
-    return <div>Error: Todos data is null or undefined</div>
+    return <div>Error: Todo data is null or undefined</div>
   }
 
   return (
     <>
       <TodoList
-        dataSoure={data}
+        dataSource={data}
         handleDeleteTodo={async (id) => {
           await doDelete(id);
           window.location.reload()

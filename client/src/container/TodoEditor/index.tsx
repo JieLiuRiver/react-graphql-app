@@ -22,7 +22,7 @@ export default React.memo<TodoEditorProps>(({
   onCancel
 }) => {
   const [taskName, setTaskName] = useState('')
-  const { submit, submiting } = useAddMutation()
+  const { submit, submitting } = useAddMutation()
 
   return (
     <>
@@ -35,8 +35,9 @@ export default React.memo<TodoEditorProps>(({
           <Stack direction="row" justifyContent="flex-end" alignItems="center">
             <Button onClick={() => onCancel()} variant="outlined">Cancel</Button>
             <div style={{ width: 10 }} />
-            <Button variant="contained" disabled={submiting} onClick={async () => {
+            <Button variant="contained" disabled={submitting} onClick={async () => {
               const newTodoId = await submit(taskName)
+              onCancel()
               console.log('newTodoId', newTodoId)
             }}>Submit</Button>
           </Stack>

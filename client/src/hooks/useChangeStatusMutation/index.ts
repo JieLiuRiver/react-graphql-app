@@ -38,6 +38,6 @@ export default function useChangeStatusMutation() {
 
   return {
     submit,
-    submiting: inFlight
+    submitting: inFlight
   }
 }

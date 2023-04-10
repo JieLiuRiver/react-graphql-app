@@ -8,7 +8,7 @@ import TodoListContainerDisplay from './ContainerDisplay';
 
 const query = graphql`
   query TodoListContainerQuery {
-    todos {
+    todo {
       id
       text
       completed
@@ -23,24 +23,25 @@ interface TodoLIstContainerProps {
 const TodoListContainer: React.FC<TodoLIstContainerProps> = ({
   initialQueryRef
 }) => {
-  const [todosQueryRef, loadTodosQuery] = useQueryLoader(query, initialQueryRef);
+  const [todoQueryRef, loadTodoQuery] = useQueryLoader(query, initialQueryRef);
 
   React.useEffect(() => {
+    console.log('hello')
     if (!initialQueryRef) {
-      loadTodosQuery({});
+      loadTodoQuery({});
     }
-  }, [initialQueryRef, loadTodosQuery])
+  }, [initialQueryRef, loadTodoQuery])
 
-  if (!todosQueryRef) return null
+  if (!todoQueryRef) return null
 
   return (
     <React.Suspense fallback={<>Loading...</>}>
       <Button size="small" onClick={() => {
         // TODO： why it doest not work?
-        loadTodosQuery({}, { networkCacheConfig: { force: true } });
+        loadTodoQuery({}, { fetchPolicy: 'network-only' });
       }}>Refresh</Button>
       <TodoListContainerDisplay
-        todosQueryRef={todosQueryRef}
+        todoQueryRef={todoQueryRef}
         query={query}
       />
     </React.Suspense>

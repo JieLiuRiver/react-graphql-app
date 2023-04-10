@@ -37,6 +37,6 @@ export default function useAddMutation() {
 
   return {
     submit,
-    submiting: inFlight
+    submitting: inFlight
   }
 }

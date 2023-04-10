@@ -34,6 +34,6 @@ export default function useDeleteMutation() {
 
   return {
     submit,
-    submiting: inFlight
+    submitting: inFlight,
   }
 }

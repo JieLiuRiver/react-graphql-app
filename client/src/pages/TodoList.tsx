@@ -3,11 +3,10 @@ import { Stack, Button, Card, CardContent } from '@mui/material';
 import TodoLIstContainer from '../container/TodoListContainer'
 import TodoEditor from '../container/TodoEditor';
 
-
-export default React.memo(() => {
+export default React.memo(function TodoList () {
   const [open, setOpen] = useState(false)
   return (<>
-    <h1>Todos with React & Relay & GraphQL</h1>
+    <h1>TodoList with React & Relay & GraphQL</h1>
     <Card style={{ width: 600 }}>
       <CardContent>
         <Stack alignItems="flex-end" justifyContent="center">

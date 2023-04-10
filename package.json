@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "scripts": {
       "install": "concurrently \"cd server && pnpm install\" \"cd client && pnpm install\"",
-      "start": "concurrently \"cd server && pnpm run start\" \"cd client && pnpm run start\""
+      "start": "concurrently \"cd server && pnpm run start\" \"cd client && pnpm run start\"",
+      "open:ql": "open http://localhost:3000/graphql"
     },
     "dependencies": {
       "concurrently": "^6.2.2"
