@@ -13,7 +13,7 @@ export default function useRelayEnvironment () {
     cache: new InMemoryCache(),
   });
   
-  const network = Network.create((operation, variables) => {
+  const network = Network.create((operation: any, variables: any) => {
     return new Promise((resolve, reject) => {
       switch (operation.operationKind) {
         case 'query':

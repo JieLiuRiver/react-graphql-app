@@ -1,0 +1,12 @@
+{
+    "name": "myApp",
+    "version": "1.0.0",
+    "scripts": {
+      "install": "concurrently \"cd server && pnpm install\" \"cd client && pnpm install\"",
+      "start": "concurrently \"cd server && pnpm run start\" \"cd client && pnpm run start\""
+    },
+    "dependencies": {
+      "concurrently": "^6.2.2"
+    }
+  }
+  
