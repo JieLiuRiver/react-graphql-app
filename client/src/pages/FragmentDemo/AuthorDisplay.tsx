@@ -18,10 +18,12 @@ const AuthorDisplay: React.FC<Props> = ({
     author
 }) => {
     const data = useFragment(authorFragment, author)
-    return <ul>
-            <li>Author Id: {data?.id}</li>
-            <li>Author Name: {data?.name || 'Unknown'}</li>
-    </ul>;
+    return <>
+        <h2>Author</h2>
+        <pre>
+            <code>{data && JSON.stringify(data, null, 2)}</code>
+        </pre>
+    </>;
 }
  
 export default AuthorDisplay;

@@ -3,6 +3,7 @@ import graphql from 'babel-plugin-relay/macro';
 import { useLazyLoadQuery } from 'react-relay'
 import type { FragmentDemoQuery } from './__generated__/FragmentDemoQuery.graphql'
 import AuthorDisplay from './AuthorDisplay';
+import _ from 'lodash'
 
 const fragmentDemoQuery = graphql`
   query FragmentDemoQuery($todoId: ID!) {
@@ -31,11 +32,12 @@ function FragmentDemoContent() {
     todoId: '1',
   })
   return (
-    <ul>
-        <li>ID: {data.todo?.id || ''}</li>
-        <li>Name: {data.todo?.text || ''}</li>
-        <li>Todo Completed: {data.todo?.completed ? 'Yes' : 'No'}</li>
-        {data.todo?.author && <AuthorDisplay author={data.todo?.author} />}
-    </ul>
+    <>
+        <h1>Todo</h1>
+        <pre>
+          <code>{data.todo && JSON.stringify(_.omit(data.todo, ['author']), null, 2)}</code>
+        </pre>
+        {data?.todo?.author && <AuthorDisplay author={data.todo?.author} />}
+    </>
   )
 }

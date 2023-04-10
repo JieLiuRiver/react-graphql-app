@@ -8,7 +8,7 @@ import TodoListContainerDisplay from './ContainerDisplay';
 
 const query = graphql`
   query TodoListContainerQuery {
-    todo {
+    todos {
       id
       text
       completed
