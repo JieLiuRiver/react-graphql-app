@@ -3,11 +3,13 @@
 import { Environment, Store, RecordSource, Network } from 'relay-runtime';
 import { ApolloClient, InMemoryCache, createHttpLink, gql } from '@apollo/client';
 
+const graphqUrl = 'http://localhost:3000/graphql'
+
 export default function useRelayEnvironment () {
   const httpLink = createHttpLink({
-    uri: 'http://localhost:3000/graphql'
+    uri: graphqUrl
   });
-  
+
   const client = new ApolloClient({
     link: httpLink,
     cache: new InMemoryCache(),

@@ -1,24 +1,27 @@
 import React, { useState } from 'react'
 import { Stack, Button, Card, CardContent } from '@mui/material';
-import TodoLIstContainer from '../container/TodoListContainer'
+import TodoListContainer from '../container/TodoListContainer'
 import TodoEditor from '../container/TodoEditor';
 
 export default React.memo(function TodoList () {
   const [open, setOpen] = useState(false)
   return (<>
     <h1>TodoList with React & Relay & GraphQL</h1>
+
     <Card style={{ width: 600 }}>
       <CardContent>
         <Stack alignItems="flex-end" justifyContent="center">
           <Button onClick={() => setOpen(true)} variant="contained" size="small">Add</Button>
         </Stack>
-        <TodoLIstContainer initialQueryRef={null} />
+        <TodoListContainer initialQueryRef={null} />
         <TodoEditor open={open} onCancel={() => {
           window.location.reload();
-          setOpen(false)
-        }} />
+            setOpen(false)
+          }}
+        />
       </CardContent>
     </Card>
+
   </>
   )
 })
