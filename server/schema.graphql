@@ -1,0 +1,27 @@
+type User {
+  id: ID!
+  name: String!
+}
+
+type ToDo {
+  id: ID!
+  text: String!
+  completed: Boolean!
+  author: User
+}
+
+
+type Query {
+  todos: [ToDo]!
+  todo(id: ID!): ToDo!
+}
+
+type Mutation {
+  addToDo(text: String!, completed: Boolean!, authorName: String): ToDo!
+  updateToDo(id: ID!, text: String, completed: Boolean): ToDo!
+  deleteToDo(id: ID!): Boolean!
+}
+
+type Subscription {
+  todoAdded: ToDo!
+}
