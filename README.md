@@ -1,32 +1,43 @@
 
+## Set up
+
+```shell
+pnpm install
+
+pnpm run start
+```
 
 ## [Relay](https://github.com/facebook/relay/blob/main/website/docs/home.md)
 
-Relay是一个面向GraphQL的客户端数据管理库，但以一种非常具体的方式使用它，从而从中获得最大的好处。
+Relay is a client-side data management library for GraphQL, but use it in a very specific way to get the most out of it.
 
-为获得最佳性能，您希望您的应用程序在每个屏幕或页面的开头发出单个请求，而不是让各个组件发出自己的请求。
+For best performance, you want your application to make individual requests at the beginning of each screen or page, rather than having individual components make their own requests.
 
-Relay的独特优势是通过让每个组件在本地声明自己的数据需求，然后将这些需求拼接成更大的查询来避免这种权衡。这样您就可以同时获得性能和可运维性。
+Relay's unique advantage is to avoid this trade-off by having each component declare its own demands for data locally, and then stitching those demands into larger queries. This way you get both performance and maintainability.
 
-Relay使用编译器来执行此操作，该编译器会扫描您的JavaScript代码以查找GraphQL的片段，然后将这些片段拼接成完整的查询。
+Relay does this with a compiler that scans your JavaScript code for fragments of GraphQL, which are then stitched together into a complete query.
 
 #### Relay Compiler
 
-Relay Compiler将GraphQL查询转换为客户端JavaScript代码，是一个非常重要的工具，帮助我们提高GraphQL应用程序的性能和可运维性，它可以在编译时执行静态类型检查，优化查询以减少数据搬迁，并生成可缓存查询
+Relay Compiler converts GraphQL queries to client side JavaScript code and is a very important tool to help us improve the performance and maintainability of GraphQL applications, it can perform static type checking at compile time, optimize queries to reduce data transfer, and generate cacheable queries.
+
+
 #### usePreloadedQuery + useQueryLoader
 
-在React-Relay中，通常通过查询获取数据。当查询被触发时，Relay会自动发送网络请求来获取数据。但是，在某些情况下，这种自动触发查询的方式会影响性能。例如，如果用户在不同页面之间切换，每个页面都会自动触发查询，这会导致冗余的网络请求和缓慢的响应时间。
 
-为了解决这个问题，React-Relay提供了两个钩子：useQueryLoader和usePreloadedQuery。这两个钩子可以一起使用来优化数据的加载和渲染。
+In React-Relay, data is usually obtained through a query. When a query is triggered, Relay automatically sends a network request to fetch data. However, in some cases, this way of automatically triggering queries can affect performance. For example, if a user switches between different pages, each page automatically triggers a query, which results in redundant network requests and slow response times.
 
-useQueryLoader钩子可用于延迟加载查询和缓存查询结果。当组件首次渲染时，useQueryLoader返回一个空的查询引用并开始加载查询数据。当数据加载时，查询引用被更新，组件被重新渲染。下次渲染组件时，查询数据将直接从缓存中获取，而无需重新触发查询。这减少了冗余的网络请求，提高了应用程序性能。
+To solve this problem, React-Relay provides two hooks: useQueryLoader and usePreloadedQuery. These two hooks can be used together to optimize the loading and rendering of data.
 
-usePreloadedQuery挂钩可用于使用以前加载的查询数据。它接收查询引用作为参数并返回查询数据。这避免了检索查询，减少了网络请求并提高了性能。
+The useQueryLoader hook can be used to lazy load queries and cache query results. When the component is first rendered, useQueryLoader returns an empty query reference and starts loading query data. When the data is loaded, the query reference is updated and the component is re-rendered. The next time the component is rendered, the query data will be fetched directly from the cache without re-triggering the query. This reduces redundant network requests and improves application performance.
 
-总之，useQueryLoader和usePreloadedQuery挂钩可以帮助我们优化React-Relay中的数据加载和渲染。它们的结合可以提高应用程序性能并减少冗余的网络请求
+The usePreloadedQuery hook can be used to use previously loaded query data. It receives query references as parameters and returns query data. This avoids retrieving queries, reduces network requests and improves performance.
+
+UseQueryLoader and usePreloadedQuery hooks can help us optimize data loading and rendering in React-Relay. Their combination can improve application performance and reduce redundant network requests
 
 
-### Fragment
+### Useful links
 - [fragments](https://github.com/facebook/relay/blob/main/website/docs/tutorial/fragments-1.md)
 - [use-fragment](https://github.com/facebook/relay/blob/main/website/docs/api-reference/hooks/use-fragment.md)
-  
+- [relay-environment-provider](https://relay.dev/docs/api-reference/relay-environment-provider/)
+- [Relay Environment](https://relay.dev/docs/v10.1.3/relay-environment/)

@@ -3,7 +3,7 @@ import logger from "morgan";
 import * as path from "path";
 import { init as initGraphql } from './graphql';
 
-import { errorHandler, errorNotFoundHandler } from "./middlewares/errorHandler";
+import { errorHandler, errorNotFoundHandler } from "./middleware/errorHandler";
 
 import { index } from "./routes/index";
 import initializeDatabase from "./database";

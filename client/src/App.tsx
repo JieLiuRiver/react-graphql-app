@@ -1,6 +1,6 @@
 import React from 'react'
 import { RelayEnvironmentProvider } from 'react-relay/hooks';
-import TodoList from './pages/TodoList';
+import TodoListDemo from './pages/TodoList';
 import FragmentDemo from './pages/FragmentDemo';
 import FetchQueryDemo from './pages/FetchQueryDemo';
 import WithoutFragmentDemo from './pages/WithoutFragmentDemo';
@@ -22,7 +22,7 @@ function App() {
   const pathname = window.location.pathname
 
   const routeMap: Record<string, React.ReactNode> = {
-    '/todo-list': <TodoList />,
+    '/todo-list': <TodoListDemo />,
     '/without-fragment': <WithoutFragmentDemo />,
     '/with-fragment': <FragmentDemo />,
     '/fetch-query': <FetchQueryDemo />,
@@ -30,9 +30,11 @@ function App() {
 
   return (
     <RelayEnvironmentProvider environment={environment}>
-        <a href="/">back home</a> <br/>
-        <Menus data={Object.keys(routeMap)} />
-        {routeMap[pathname] || null}
+        <React.Fragment>
+          {pathname !== '/' && <><a href="/">back</a> <br/></>}
+          <Menus data={Object.keys(routeMap)} />
+          {routeMap[pathname] || null}
+        </React.Fragment>
     </RelayEnvironmentProvider>
   );
 }

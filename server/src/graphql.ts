@@ -1,4 +1,4 @@
-import { ApolloServer, ExpressContext } from 'apollo-server-express';
+import { ApolloServer, ExpressContext, Config } from 'apollo-server-express';
 import { Express } from 'express';
 import * as fs from 'fs';
 import * as path from 'path';

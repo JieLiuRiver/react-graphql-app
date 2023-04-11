@@ -8,6 +8,12 @@
     },
     "dependencies": {
       "concurrently": "^6.2.2"
-    }
+    },
+    "keywords": [
+      "relay",
+      "graphql",
+      "react",
+      "apollo"
+    ]
   }
   
