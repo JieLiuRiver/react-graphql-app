@@ -4,6 +4,7 @@ import TodoListDemo from './pages/TodoList';
 import FragmentDemo from './pages/FragmentDemo';
 import FetchQueryDemo from './pages/FetchQueryDemo';
 import WithoutFragmentDemo from './pages/WithoutFragmentDemo';
+import RefetchableFragmentDemo from './pages/RefetchableFragmentDemo';
 import useRelayEnvironment from './hooks/useRelayEnvironment';
 import './App.css';
 
@@ -25,6 +26,7 @@ function App() {
     '/todo-list': <TodoListDemo />,
     '/without-fragment': <WithoutFragmentDemo />,
     '/with-fragment': <FragmentDemo />,
+    '/with-refetchable-fragment': <RefetchableFragmentDemo />,
     '/fetch-query': <FetchQueryDemo />,
   }
 

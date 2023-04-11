@@ -26,7 +26,6 @@ const TodoListContainer: React.FC<TodoLIstContainerProps> = ({
   const [todoQueryRef, loadTodoQuery] = useQueryLoader(query, initialQueryRef);
 
   React.useEffect(() => {
-    console.log('hello')
     if (!initialQueryRef) {
       loadTodoQuery({});
     }
@@ -40,6 +39,7 @@ const TodoListContainer: React.FC<TodoLIstContainerProps> = ({
         // TODO： why it doest not work?
         loadTodoQuery({}, { fetchPolicy: 'network-only' });
       }}>Refresh</Button>
+      
       <TodoListContainerDisplay
         todoQueryRef={todoQueryRef}
         query={query}
